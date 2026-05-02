@@ -1,0 +1,1228 @@
+@startuml
+
+class co.edu.unbosque.mundialhubbackend.MundialhubbackendApplication {
+	{method} +getModelMapper () : org.modelmapper.ModelMapper
+	{method}  {static} +main ( args : [Ljava.lang.String; ) : void
+}
+
+
+class co.edu.unbosque.mundialhubbackend.ServletInitializer {
+	{method} #configure ( application : org.springframework.boot.builder.SpringApplicationBuilder ) : org.springframework.boot.builder.SpringApplicationBuilder
+}
+
+
+class co.edu.unbosque.mundialhubbackend.configuration.LoadDatabase {
+	{field} {static} -log : org.slf4j.Logger
+	{method} ~initDatabase ( userRepo : co.edu.unbosque.mundialhubbackend.repository.UserRepository , passwordEncoder : org.springframework.security.crypto.password.PasswordEncoder ) : org.springframework.boot.CommandLineRunner
+}
+
+
+class co.edu.unbosque.mundialhubbackend.configuration.OpenApiConfig {
+	{method} +customOpenAPI () : io.swagger.v3.oas.models.OpenAPI
+}
+
+
+class co.edu.unbosque.mundialhubbackend.controller.AlbumController {
+	{method} +awardActivityPackage ( request : jakarta.servlet.http.HttpServletRequest , body : co.edu.unbosque.mundialhubbackend.util.AlbumDetailRequest ) : org.springframework.http.ResponseEntity
+	{method} +cancelExchange ( request : jakarta.servlet.http.HttpServletRequest , body : co.edu.unbosque.mundialhubbackend.util.RespondExchangeRequest ) : org.springframework.http.ResponseEntity
+	{method} -extractUsername ( req : jakarta.servlet.http.HttpServletRequest ) : String
+	{method} +getAlbumSections ( request : jakarta.servlet.http.HttpServletRequest ) : org.springframework.http.ResponseEntity
+	{method} +getDuplicates ( request : jakarta.servlet.http.HttpServletRequest ) : org.springframework.http.ResponseEntity
+	{method} +getExchangeHistory ( request : jakarta.servlet.http.HttpServletRequest ) : org.springframework.http.ResponseEntity
+	{method} +getIncomingExchanges ( request : jakarta.servlet.http.HttpServletRequest ) : org.springframework.http.ResponseEntity
+	{method} +getPendingPackages ( request : jakarta.servlet.http.HttpServletRequest ) : org.springframework.http.ResponseEntity
+	{method} +openPackage ( request : jakarta.servlet.http.HttpServletRequest , body : co.edu.unbosque.mundialhubbackend.util.OpenPackageRequest ) : org.springframework.http.ResponseEntity
+	{method} +proposeExchange ( request : jakarta.servlet.http.HttpServletRequest , body : co.edu.unbosque.mundialhubbackend.util.ProposeExchangeRequest ) : org.springframework.http.ResponseEntity
+	{method} +redeemPromo ( request : jakarta.servlet.http.HttpServletRequest , body : co.edu.unbosque.mundialhubbackend.util.RedeemPromoRequest ) : org.springframework.http.ResponseEntity
+	{method} +respondExchange ( request : jakarta.servlet.http.HttpServletRequest , body : co.edu.unbosque.mundialhubbackend.util.RespondExchangeRequest ) : org.springframework.http.ResponseEntity
+	{method} +viewAlbum ( request : jakarta.servlet.http.HttpServletRequest , body : co.edu.unbosque.mundialhubbackend.util.AlbumDetailRequest ) : org.springframework.http.ResponseEntity
+}
+
+
+class co.edu.unbosque.mundialhubbackend.controller.AuthController {
+	{field} -authenticationManager : org.springframework.security.authentication.AuthenticationManager
+	{method} +confirmarCorreo ( data : co.edu.unbosque.mundialhubbackend.util.ConfirmEmailRequest ) : org.springframework.http.ResponseEntity
+	{method} +login ( loginRequest : co.edu.unbosque.mundialhubbackend.util.LoginRequest ) : org.springframework.http.ResponseEntity
+	{method} +reenviarConfirmacion ( data : co.edu.unbosque.mundialhubbackend.util.ParameterEmailRequest ) : org.springframework.http.ResponseEntity
+	{method} +register ( registerRequest : co.edu.unbosque.mundialhubbackend.util.RegisterRequest ) : org.springframework.http.ResponseEntity
+}
+
+
+class co.edu.unbosque.mundialhubbackend.controller.CommunityController {
+	{method} +createCommunity ( request : jakarta.servlet.http.HttpServletRequest , body : co.edu.unbosque.mundialhubbackend.util.CreateCommunityRequest ) : org.springframework.http.ResponseEntity
+	{method} -extractUsername ( req : jakarta.servlet.http.HttpServletRequest ) : String
+	{method} +generateInvite ( request : jakarta.servlet.http.HttpServletRequest , body : co.edu.unbosque.mundialhubbackend.util.GenerateInviteRequest ) : org.springframework.http.ResponseEntity
+	{method} +getActiveInvites ( request : jakarta.servlet.http.HttpServletRequest , body : co.edu.unbosque.mundialhubbackend.util.GenerateInviteRequest ) : org.springframework.http.ResponseEntity
+	{method} +getCommunityDetail ( request : jakarta.servlet.http.HttpServletRequest , body : co.edu.unbosque.mundialhubbackend.util.GenerateInviteRequest ) : org.springframework.http.ResponseEntity
+	{method} +getMyCommunities ( request : jakarta.servlet.http.HttpServletRequest ) : org.springframework.http.ResponseEntity
+	{method} +joinByToken ( request : jakarta.servlet.http.HttpServletRequest , body : co.edu.unbosque.mundialhubbackend.util.JoinCommunityRequest ) : org.springframework.http.ResponseEntity
+	{method} +leaveCommunity ( request : jakarta.servlet.http.HttpServletRequest , body : co.edu.unbosque.mundialhubbackend.util.GenerateInviteRequest ) : org.springframework.http.ResponseEntity
+	{method} +removeMember ( request : jakarta.servlet.http.HttpServletRequest , body : co.edu.unbosque.mundialhubbackend.util.RemoveMemberRequest ) : org.springframework.http.ResponseEntity
+	{method} +revokeInvite ( request : jakarta.servlet.http.HttpServletRequest , body : co.edu.unbosque.mundialhubbackend.util.RevokeInviteRequest ) : org.springframework.http.ResponseEntity
+}
+
+
+class co.edu.unbosque.mundialhubbackend.controller.FixtureController {
+	{method} -extractUsername ( req : jakarta.servlet.http.HttpServletRequest ) : String
+	{method} +getAgenda ( request : jakarta.servlet.http.HttpServletRequest ) : org.springframework.http.ResponseEntity
+	{method} +getAllFixtures ( request : jakarta.servlet.http.HttpServletRequest ) : org.springframework.http.ResponseEntity
+	{method} +getFixtureDetail ( request : jakarta.servlet.http.HttpServletRequest , body : co.edu.unbosque.mundialhubbackend.util.GetFixturesRequest ) : org.springframework.http.ResponseEntity
+	{method} +getFixturesByDate ( request : jakarta.servlet.http.HttpServletRequest , body : co.edu.unbosque.mundialhubbackend.util.GetFixturesRequest ) : org.springframework.http.ResponseEntity
+	{method} +getLiveFixtures ( request : jakarta.servlet.http.HttpServletRequest ) : org.springframework.http.ResponseEntity
+	{method} +syncFixtures ( request : jakarta.servlet.http.HttpServletRequest ) : org.springframework.http.ResponseEntity
+}
+
+
+class co.edu.unbosque.mundialhubbackend.controller.MatchController {
+	{method} +createMatch ( request : co.edu.unbosque.mundialhubbackend.util.MatchCreateRequest ) : org.springframework.http.ResponseEntity
+	{method} +getAllMatches () : org.springframework.http.ResponseEntity
+	{method} +updateResult ( request : co.edu.unbosque.mundialhubbackend.util.MatchResultRequest ) : org.springframework.http.ResponseEntity
+}
+
+
+class co.edu.unbosque.mundialhubbackend.controller.PollController {
+	{method} +createPoll ( request : jakarta.servlet.http.HttpServletRequest , body : co.edu.unbosque.mundialhubbackend.util.CreatePollRequest ) : org.springframework.http.ResponseEntity
+	{method} -extractUsername ( req : jakarta.servlet.http.HttpServletRequest ) : String
+	{method} +finishPoll ( request : jakarta.servlet.http.HttpServletRequest , body : co.edu.unbosque.mundialhubbackend.util.FinishPollRequest ) : org.springframework.http.ResponseEntity
+	{method} +getMyPolls ( request : jakarta.servlet.http.HttpServletRequest ) : org.springframework.http.ResponseEntity
+	{method} +getMyPredictions ( request : jakarta.servlet.http.HttpServletRequest , body : co.edu.unbosque.mundialhubbackend.util.FinishPollRequest ) : org.springframework.http.ResponseEntity
+	{method} +getPollDetail ( request : jakarta.servlet.http.HttpServletRequest , body : co.edu.unbosque.mundialhubbackend.util.FinishPollRequest ) : org.springframework.http.ResponseEntity
+	{method} +getPredictionsForFixture ( request : jakarta.servlet.http.HttpServletRequest , body : co.edu.unbosque.mundialhubbackend.util.SavePredictionRequest ) : org.springframework.http.ResponseEntity
+	{method} +getRanking ( request : jakarta.servlet.http.HttpServletRequest , body : co.edu.unbosque.mundialhubbackend.util.FinishPollRequest ) : org.springframework.http.ResponseEntity
+	{method} +joinPoll ( request : jakarta.servlet.http.HttpServletRequest , body : co.edu.unbosque.mundialhubbackend.util.JoinPollRequest ) : org.springframework.http.ResponseEntity
+	{method} +savePrediction ( request : jakarta.servlet.http.HttpServletRequest , body : co.edu.unbosque.mundialhubbackend.util.SavePredictionRequest ) : org.springframework.http.ResponseEntity
+}
+
+
+class co.edu.unbosque.mundialhubbackend.controller.PreferenceController {
+	{method} +addFavoriteStadiums ( request : jakarta.servlet.http.HttpServletRequest , prefRequest : co.edu.unbosque.mundialhubbackend.util.PreferenceRequest ) : org.springframework.http.ResponseEntity
+	{method} +addFavoriteTeams ( request : jakarta.servlet.http.HttpServletRequest , prefRequest : co.edu.unbosque.mundialhubbackend.util.PreferenceRequest ) : org.springframework.http.ResponseEntity
+	{method} -extractUsername ( request : jakarta.servlet.http.HttpServletRequest ) : String
+	{method} +getFavoriteStadiums ( request : jakarta.servlet.http.HttpServletRequest ) : org.springframework.http.ResponseEntity
+	{method} +getFavoriteTeams ( request : jakarta.servlet.http.HttpServletRequest ) : org.springframework.http.ResponseEntity
+	{method} +removeFavoriteStadiums ( request : jakarta.servlet.http.HttpServletRequest , prefRequest : co.edu.unbosque.mundialhubbackend.util.PreferenceRequest ) : org.springframework.http.ResponseEntity
+	{method} +removeFavoriteTeams ( request : jakarta.servlet.http.HttpServletRequest , prefRequest : co.edu.unbosque.mundialhubbackend.util.PreferenceRequest ) : org.springframework.http.ResponseEntity
+	{method} +updateFavoriteStadiums ( request : jakarta.servlet.http.HttpServletRequest , prefRequest : co.edu.unbosque.mundialhubbackend.util.PreferenceRequest ) : org.springframework.http.ResponseEntity
+	{method} +updateFavoriteTeams ( request : jakarta.servlet.http.HttpServletRequest , prefRequest : co.edu.unbosque.mundialhubbackend.util.PreferenceRequest ) : org.springframework.http.ResponseEntity
+}
+
+
+class co.edu.unbosque.mundialhubbackend.controller.StadiumController {
+	{method} +create ( dto : co.edu.unbosque.mundialhubbackend.dto.StadiumDTO ) : org.springframework.http.ResponseEntity
+	{method} +delete ( name : String ) : org.springframework.http.ResponseEntity
+	{method} +getAll () : org.springframework.http.ResponseEntity
+	{method} +getByName ( name : String ) : org.springframework.http.ResponseEntity
+	{method} +update ( name : String , dto : co.edu.unbosque.mundialhubbackend.dto.StadiumDTO ) : org.springframework.http.ResponseEntity
+}
+
+
+class co.edu.unbosque.mundialhubbackend.controller.TeamController {
+	{method} +create ( dto : co.edu.unbosque.mundialhubbackend.dto.TeamDTO ) : org.springframework.http.ResponseEntity
+	{method} +delete ( name : String ) : org.springframework.http.ResponseEntity
+	{method} +getAll () : org.springframework.http.ResponseEntity
+	{method} +getByName ( name : String ) : org.springframework.http.ResponseEntity
+	{method} +update ( name : String , dto : co.edu.unbosque.mundialhubbackend.dto.TeamDTO ) : org.springframework.http.ResponseEntity
+}
+
+
+class co.edu.unbosque.mundialhubbackend.controller.UserController {
+	{method} +create ( data : co.edu.unbosque.mundialhubbackend.util.RegisterRequest ) : org.springframework.http.ResponseEntity
+	{method} +deleteById ( id : Long ) : org.springframework.http.ResponseEntity
+	{method} +deleteByJson ( dto : co.edu.unbosque.mundialhubbackend.util.ParameterEmailRequest ) : org.springframework.http.ResponseEntity
+	{method} +getAccount ( in : co.edu.unbosque.mundialhubbackend.util.ParameterEmailRequest ) : org.springframework.http.ResponseEntity
+	{method} +getByUsername ( param : String ) : org.springframework.http.ResponseEntity
+	{method} +putMethodName ( update : co.edu.unbosque.mundialhubbackend.util.AccountUpdateRequest ) : org.springframework.http.ResponseEntity
+	{method} +showAll () : org.springframework.http.ResponseEntity
+}
+
+
+class co.edu.unbosque.mundialhubbackend.dto.CommunityDTO {
+	{field} +createdAt : java.time.LocalDateTime
+	{field} +description : String
+	{field} +id : Long
+	{field} +memberCount : int
+	{field} +name : String
+	{field} +ownerUsername : String
+	{field} +pollCount : int
+}
+
+
+class co.edu.unbosque.mundialhubbackend.dto.CommunityInviteDTO {
+	{field} +active : boolean
+	{field} +communityId : Long
+	{field} +communityName : String
+	{field} +createdAt : java.time.LocalDateTime
+	{field} +createdByUsername : String
+	{field} +currentUses : Integer
+	{field} +expiresAt : java.time.LocalDateTime
+	{field} +id : Long
+	{field} +inviteUrl : String
+	{field} +maxUses : Integer
+	{field} +token : String
+}
+
+
+class co.edu.unbosque.mundialhubbackend.dto.CommunityMemberDTO {
+	{field} +id : Long
+	{field} +joinedAt : java.time.LocalDateTime
+	{field} +name : String
+	{field} +userId : Long
+	{field} +username : String
+}
+
+
+class co.edu.unbosque.mundialhubbackend.dto.FixtureDTO {
+	{field} +awayGoals : Integer
+	{field} +awayTeamId : Long
+	{field} +awayTeamLogo : String
+	{field} +awayTeamName : String
+	{field} +city : String
+	{field} +elapsed : Integer
+	{field} +homeGoals : Integer
+	{field} +homeTeamId : Long
+	{field} +homeTeamLogo : String
+	{field} +homeTeamName : String
+	{field} +id : Long
+	{field} +leagueId : Long
+	{field} +leagueLogo : String
+	{field} +leagueName : String
+	{field} +leagueRound : String
+	{field} +matchDate : java.time.LocalDateTime
+	{field} +pendingUpdate : boolean
+	{field} +referee : String
+	{field} +season : Integer
+	{field} +status : String
+	{field} +venue : String
+}
+
+
+class co.edu.unbosque.mundialhubbackend.dto.FixtureEventDTO {
+	{field} +assistName : String
+	{field} +comments : String
+	{field} +detail : String
+	{field} +elapsed : Integer
+	{field} +elapsedExtra : Integer
+	{field} +fixtureId : Long
+	{field} +playerName : String
+	{field} +teamId : Long
+	{field} +teamName : String
+	{field} +type : String
+}
+
+
+class co.edu.unbosque.mundialhubbackend.dto.MatchDTO {
+	{field} +awayScore : Integer
+	{field} +homeScore : Integer
+	{field} +id : Long
+	{field} +matchDate : java.time.LocalDateTime
+}
+
+
+class co.edu.unbosque.mundialhubbackend.dto.PollDTO {
+	{field} +createdAt : java.time.LocalDateTime
+	{field} +creatorUsername : String
+	{field} +finishedAt : java.time.LocalDateTime
+	{field} +id : Long
+	{field} +inviteCode : String
+	{field} +memberCount : int
+	{field} +name : String
+}
+
+
+class co.edu.unbosque.mundialhubbackend.dto.PollMemberDTO {
+	{field} +joinedAt : java.time.LocalDateTime
+	{field} +name : String
+	{field} +pollMemberId : Long
+	{field} +rankingPosition : Integer
+	{field} +totalPoints : Integer
+	{field} +userId : Long
+	{field} +username : String
+}
+
+
+class co.edu.unbosque.mundialhubbackend.dto.PredictionDTO {
+	{field} +actualAwayGoals : Integer
+	{field} +actualHomeGoals : Integer
+	{field} +awayTeamName : String
+	{field} +closed : boolean
+	{field} +createdAt : java.time.LocalDateTime
+	{field} +fixtureId : Long
+	{field} +homeTeamName : String
+	{field} +id : Long
+	{field} +pointsEarned : Integer
+	{field} +pollMemberId : Long
+	{field} +predictedAwayGoals : Integer
+	{field} +predictedHomeGoals : Integer
+	{field} +updatedAt : java.time.LocalDateTime
+}
+
+
+class co.edu.unbosque.mundialhubbackend.dto.StadiumDTO {
+	{field} +capacity : Integer
+	{field} +city : String
+	{field} +id : Long
+	{field} +name : String
+}
+
+
+class co.edu.unbosque.mundialhubbackend.dto.StickerDTO {
+	{field} +albumNumber : Integer
+	{field} +description : String
+	{field} +id : Long
+	{field} +imageUrl : String
+	{field} +name : String
+	{field} +section : String
+}
+
+
+class co.edu.unbosque.mundialhubbackend.dto.StickerExchangeDTO {
+	{field} +expiresAt : java.time.LocalDateTime
+	{field} +id : Long
+	{field} +proposedAt : java.time.LocalDateTime
+	{field} +proposerUsername : String
+	{field} +receiverUsername : String
+	{field} +respondedAt : java.time.LocalDateTime
+}
+
+
+class co.edu.unbosque.mundialhubbackend.dto.StickerPackageDTO {
+	{field} +awardedAt : java.time.LocalDateTime
+	{field} +id : Long
+	{field} +openedAt : java.time.LocalDateTime
+	{field} +stickerCount : Integer
+}
+
+
+class co.edu.unbosque.mundialhubbackend.dto.TeamDTO {
+	{field} +flagUrl : String
+	{field} +groupName : String
+	{field} +id : Long
+	{field} +name : String
+}
+
+
+class co.edu.unbosque.mundialhubbackend.dto.UserDTO {
+	{field} +accountNonExpired : boolean
+	{field} +accountNonLocked : boolean
+	{field} +createdAt : java.time.LocalDateTime
+	{field} +credentialsNonExpired : boolean
+	{field} +email : String
+	{field} +enabled : boolean
+	{field} +id : Long
+	{field} +name : String
+	{field} +password : String
+	{field} +username : String
+	{field} +verificationCode : String
+	{method} +toString () : String
+}
+
+
+class co.edu.unbosque.mundialhubbackend.dto.UserStickerDTO {
+	{field} +firstObtainedAt : java.time.LocalDateTime
+	{field} +hasDuplicates : boolean
+	{field} +id : Long
+	{field} +inAlbum : boolean
+	{field} +offeredForExchange : Integer
+	{field} +quantity : Integer
+}
+
+
+class co.edu.unbosque.mundialhubbackend.model.Community {
+	{field} +createdAt : java.time.LocalDateTime
+	{field} +description : String
+	{field} +id : Long
+	{field} +name : String
+}
+
+
+class co.edu.unbosque.mundialhubbackend.model.CommunityInvite {
+	{field} +active : boolean
+	{field} +createdAt : java.time.LocalDateTime
+	{field} +currentUses : Integer
+	{field} +expiresAt : java.time.LocalDateTime
+	{field} +id : Long
+	{field} +maxUses : Integer
+	{field} +token : String
+}
+
+
+class co.edu.unbosque.mundialhubbackend.model.CommunityMember {
+	{field} +id : Long
+	{field} +joinedAt : java.time.LocalDateTime
+}
+
+
+enum co.edu.unbosque.mundialhubbackend.model.CommunityMember$CommunityRole {
+	{field} +MEMBER
+	{field} +OWNER
+}
+
+
+class co.edu.unbosque.mundialhubbackend.model.Fixture {
+	{field} +awayGoals : Integer
+	{field} +awayTeamId : Long
+	{field} +awayTeamLogo : String
+	{field} +awayTeamName : String
+	{field} +cachedAt : java.time.LocalDateTime
+	{field} +city : String
+	{field} +elapsed : Integer
+	{field} +homeGoals : Integer
+	{field} +homeTeamId : Long
+	{field} +homeTeamLogo : String
+	{field} +homeTeamName : String
+	{field} +id : Long
+	{field} +leagueId : Long
+	{field} +leagueLogo : String
+	{field} +leagueName : String
+	{field} +leagueRound : String
+	{field} +matchDate : java.time.LocalDateTime
+	{field} +referee : String
+	{field} +season : Integer
+	{field} +status : String
+	{field} +venue : String
+}
+
+
+class co.edu.unbosque.mundialhubbackend.model.FixtureEvent {
+	{field} +assistName : String
+	{field} +comments : String
+	{field} +detail : String
+	{field} +elapsed : Integer
+	{field} +elapsedExtra : Integer
+	{field} +id : Long
+	{field} +playerName : String
+	{field} +teamId : Long
+	{field} +teamName : String
+	{field} +type : String
+}
+
+
+class co.edu.unbosque.mundialhubbackend.model.Match {
+	{field} +awayScore : Integer
+	{field} +homeScore : Integer
+	{field} +id : Long
+	{field} +matchDate : java.time.LocalDateTime
+}
+
+
+enum co.edu.unbosque.mundialhubbackend.model.Match$MatchStatus {
+	{field} +FINISHED
+	{field} +IN_PROGRESS
+	{field} +SCHEDULED
+}
+
+
+class co.edu.unbosque.mundialhubbackend.model.Poll {
+	{field} +createdAt : java.time.LocalDateTime
+	{field} +finishedAt : java.time.LocalDateTime
+	{field} +id : Long
+	{field} +inviteCode : String
+	{field} +name : String
+}
+
+
+enum co.edu.unbosque.mundialhubbackend.model.Poll$PollStatus {
+	{field} +ACTIVE
+	{field} +FINISHED
+}
+
+
+class co.edu.unbosque.mundialhubbackend.model.PollMember {
+	{field} +id : Long
+	{field} +joinedAt : java.time.LocalDateTime
+	{field} +rankingPosition : Integer
+	{field} +totalPoints : Integer
+}
+
+
+class co.edu.unbosque.mundialhubbackend.model.Prediction {
+	{field} +closed : boolean
+	{field} +createdAt : java.time.LocalDateTime
+	{field} +id : Long
+	{field} +pointsEarned : Integer
+	{field} +predictedAwayGoals : Integer
+	{field} +predictedHomeGoals : Integer
+	{field} +updatedAt : java.time.LocalDateTime
+}
+
+
+class co.edu.unbosque.mundialhubbackend.model.PromoRedemption {
+	{field} +id : Long
+	{field} +redeemedAt : java.time.LocalDateTime
+}
+
+
+class co.edu.unbosque.mundialhubbackend.model.PromotionalCode {
+	{field} +active : boolean
+	{field} +code : String
+	{field} +createdAt : java.time.LocalDateTime
+	{field} +currentUses : Integer
+	{field} +expiresAt : java.time.LocalDateTime
+	{field} +id : Long
+	{field} +maxUses : Integer
+}
+
+
+class co.edu.unbosque.mundialhubbackend.model.Stadium {
+	{field} +capacity : Integer
+	{field} +city : String
+	{field} +id : Long
+	{field} +name : String
+}
+
+
+class co.edu.unbosque.mundialhubbackend.model.Sticker {
+	{field} +active : boolean
+	{field} +albumNumber : Integer
+	{field} +description : String
+	{field} +id : Long
+	{field} +imageUrl : String
+	{field} +name : String
+	{field} +section : String
+}
+
+
+enum co.edu.unbosque.mundialhubbackend.model.Sticker$StickerCategory {
+	{field} +BADGE
+	{field} +PLAYER
+	{field} +STADIUM
+	{field} +TROPHY
+}
+
+
+enum co.edu.unbosque.mundialhubbackend.model.Sticker$StickerRarity {
+	{field} +COMMON
+	{field} +EPIC
+	{field} +LEGEND
+	{field} +RARE
+}
+
+
+class co.edu.unbosque.mundialhubbackend.model.StickerExchange {
+	{field} +expiresAt : java.time.LocalDateTime
+	{field} +id : Long
+	{field} +proposedAt : java.time.LocalDateTime
+	{field} +respondedAt : java.time.LocalDateTime
+}
+
+
+enum co.edu.unbosque.mundialhubbackend.model.StickerExchange$ExchangeStatus {
+	{field} +ACCEPTED
+	{field} +CANCELLED
+	{field} +EXPIRED
+	{field} +PENDING
+	{field} +REJECTED
+}
+
+
+class co.edu.unbosque.mundialhubbackend.model.StickerPackage {
+	{field} +awardedAt : java.time.LocalDateTime
+	{field} +id : Long
+	{field} +openedAt : java.time.LocalDateTime
+	{field} +stickerCount : Integer
+}
+
+
+enum co.edu.unbosque.mundialhubbackend.model.StickerPackage$PackageSource {
+	{field} +DAILY_LOGIN
+	{field} +FOLLOW_LIVE
+	{field} +POLL_WINNER
+	{field} +PREDICTION_COMPLETE
+	{field} +PROMO_CODE
+}
+
+
+enum co.edu.unbosque.mundialhubbackend.model.StickerPackage$PackageStatus {
+	{field} +OPENED
+	{field} +PENDING
+}
+
+
+class co.edu.unbosque.mundialhubbackend.model.Team {
+	{field} +flagUrl : String
+	{field} +groupName : String
+	{field} +id : Long
+	{field} +name : String
+}
+
+
+class co.edu.unbosque.mundialhubbackend.model.User {
+	{field} +accountNonExpired : boolean
+	{field} +accountNonLocked : boolean
+	{field} +createdAt : java.time.LocalDateTime
+	{field} +credentialsNonExpired : boolean
+	{field} +email : String
+	{field} +enabled : boolean
+	{field} +id : Long
+	{field} +name : String
+	{field} +password : String
+	{field} {static} -serialVersionUID : long
+	{field} +username : String
+	{field} +verificationCode : String
+	{method} +getAuthorities () : java.util.Collection
+}
+
+
+enum co.edu.unbosque.mundialhubbackend.model.User$Role {
+	{field} +ADMIN
+	{field} +COMPLIANCE
+	{field} +CONTENT
+	{field} +SUPPORT
+	{field} +USER
+}
+
+
+enum co.edu.unbosque.mundialhubbackend.model.User$UserStatus {
+	{field} +ACTIVE
+	{field} +PENDING_VERIFICATION
+	{field} +SUSPENDED
+}
+
+
+class co.edu.unbosque.mundialhubbackend.model.UserSticker {
+	{field} +firstObtainedAt : java.time.LocalDateTime
+	{field} +id : Long
+	{field} +offeredForExchange : Integer
+	{field} +quantity : Integer
+}
+
+
+interface co.edu.unbosque.mundialhubbackend.repository.CommunityInviteRepository {
+	{method}  {abstract} +findByActiveTrueAndExpiresAtBefore ( now : java.time.LocalDateTime ) : java.util.List
+	{method}  {abstract} +findByCommunityIdAndActiveTrue ( communityId : Long ) : java.util.List
+	{method}  {abstract} +findByToken ( token : String ) : java.util.Optional
+}
+
+
+interface co.edu.unbosque.mundialhubbackend.repository.CommunityMemberRepository {
+	{method}  {abstract} +deleteByCommunityIdAndUserUsername ( communityId : Long , username : String ) : void
+	{method}  {abstract} +existsByCommunityIdAndUserUsername ( communityId : Long , username : String ) : boolean
+	{method}  {abstract} +existsByCommunityIdAndUserUsernameAndRole ( communityId : Long , username : String , role : co.edu.unbosque.mundialhubbackend.model.CommunityMember$CommunityRole ) : boolean
+	{method}  {abstract} +findByCommunityIdAndUserUsername ( communityId : Long , username : String ) : java.util.Optional
+	{method}  {abstract} +findByCommunityIdOrderByJoinedAtAsc ( communityId : Long ) : java.util.List
+}
+
+
+interface co.edu.unbosque.mundialhubbackend.repository.CommunityRepository {
+	{method}  {abstract} +findCommunitiesByParticipant ( username : String ) : java.util.List
+	{method}  {abstract} +isUserMember ( communityId : Long , username : String ) : boolean
+}
+
+
+interface co.edu.unbosque.mundialhubbackend.repository.FixtureEventRepository {
+	{method}  {abstract} +deleteByFixtureId ( fixtureId : Long ) : void
+	{method}  {abstract} +findByFixtureIdOrderByElapsedAsc ( fixtureId : Long ) : java.util.List
+}
+
+
+interface co.edu.unbosque.mundialhubbackend.repository.FixtureRepository {
+	{method}  {abstract} +findAgendaForTeams ( teamIds : java.util.List , from : java.time.LocalDateTime ) : java.util.List
+	{method}  {abstract} +findByLeagueIdAndSeasonOrderByMatchDateAsc ( leagueId : Long , season : Integer ) : java.util.List
+	{method}  {abstract} +findByMatchDateBetweenOrderByMatchDateAsc ( from : java.time.LocalDateTime , to : java.time.LocalDateTime ) : java.util.List
+	{method}  {abstract} +findByTeamAndSeason ( teamId : Long , season : Integer ) : java.util.List
+	{method}  {abstract} +findLiveFixtures () : java.util.List
+	{method}  {abstract} +findLiveFixturesWithExpiredCache ( threshold : java.time.LocalDateTime ) : java.util.List
+	{method}  {abstract} +findUpcomingWithExpiredCache ( threshold : java.time.LocalDateTime ) : java.util.List
+}
+
+
+interface co.edu.unbosque.mundialhubbackend.repository.MatchRepository {
+	{method}  {abstract} +findMatchesByStatusAndDateRange ( status : co.edu.unbosque.mundialhubbackend.model.Match$MatchStatus , startDate : java.time.LocalDateTime , endDate : java.time.LocalDateTime ) : java.util.List
+}
+
+
+interface co.edu.unbosque.mundialhubbackend.repository.PollMemberRepository {
+	{method}  {abstract} +existsByPollIdAndUserUsername ( pollId : Long , username : String ) : boolean
+	{method}  {abstract} +findByPollId ( pollId : Long ) : java.util.List
+	{method}  {abstract} +findByPollIdAndUserUsername ( pollId : Long , username : String ) : java.util.Optional
+	{method}  {abstract} +findByPollIdOrderByTotalPointsDescJoinedAtAsc ( pollId : Long ) : java.util.List
+}
+
+
+interface co.edu.unbosque.mundialhubbackend.repository.PollRepository {
+	{method}  {abstract} +existsByInviteCode ( inviteCode : String ) : boolean
+	{method}  {abstract} +findActiveNotJoinedByUser ( username : String , status : co.edu.unbosque.mundialhubbackend.model.Poll$PollStatus ) : java.util.List
+	{method}  {abstract} +findByInviteCode ( inviteCode : String ) : java.util.Optional
+	{method}  {abstract} +findPollsByParticipant ( username : String ) : java.util.List
+}
+
+
+interface co.edu.unbosque.mundialhubbackend.repository.PredictionRepository {
+	{method}  {abstract} +findByPollAndFixture ( pollId : Long , fixtureId : Long ) : java.util.List
+	{method}  {abstract} +findByPollMemberIdAndFixtureId ( pollMemberId : Long , fixtureId : Long ) : java.util.Optional
+	{method}  {abstract} +findByPollMemberIdOrderByFixtureMatchDateAsc ( pollMemberId : Long ) : java.util.List
+	{method}  {abstract} +findOpenPredictionsForStartedFixtures () : java.util.List
+	{method}  {abstract} +findUnscoredByFixture ( fixtureId : Long ) : java.util.List
+}
+
+
+interface co.edu.unbosque.mundialhubbackend.repository.PromoRedemptionRepository {
+}
+
+
+interface co.edu.unbosque.mundialhubbackend.repository.PromotionalCodeRepository {
+	{method}  {abstract} +findByCodeAndActiveTrue ( code : String ) : java.util.Optional
+	{method}  {abstract} +findByCreatedByUsernameOrderByCreatedAtDesc ( username : String ) : java.util.List
+	{method}  {abstract} +findRedemptionsByCode ( codeId : Long ) : java.util.List
+	{method}  {abstract} +hasUserRedeemed ( codeId : Long , username : String ) : boolean
+	{method} +saveRedemption ( redemption : co.edu.unbosque.mundialhubbackend.model.PromoRedemption ) : void
+}
+
+
+interface co.edu.unbosque.mundialhubbackend.repository.StadiumRepository {
+	{method}  {abstract} +deleteByName ( name : String ) : void
+	{method}  {abstract} +existsByName ( name : String ) : boolean
+	{method}  {abstract} +findByName ( name : String ) : java.util.Optional
+}
+
+
+interface co.edu.unbosque.mundialhubbackend.repository.StickerExchangeRepository {
+	{method}  {abstract} +countCompletedExchangesToday ( username : String , startOfDay : java.time.LocalDateTime ) : long
+	{method}  {abstract} +findAllByParticipant ( username : String ) : java.util.List
+	{method}  {abstract} +findByProposerUsernameOrderByProposedAtDesc ( username : String ) : java.util.List
+	{method}  {abstract} +findByReceiverUsernameAndStatusOrderByProposedAtDesc ( username : String , status : co.edu.unbosque.mundialhubbackend.model.StickerExchange$ExchangeStatus ) : java.util.List
+	{method}  {abstract} +findByStatusAndExpiresAtBefore ( status : co.edu.unbosque.mundialhubbackend.model.StickerExchange$ExchangeStatus , now : java.time.LocalDateTime ) : java.util.List
+}
+
+
+interface co.edu.unbosque.mundialhubbackend.repository.StickerPackageRepository {
+	{method}  {abstract} +countByUserAndSourceToday ( username : String , source : co.edu.unbosque.mundialhubbackend.model.StickerPackage$PackageSource , startOfDay : java.time.LocalDateTime ) : long
+	{method}  {abstract} +findByUserUsernameAndStatusOrderByAwardedAtDesc ( username : String , status : co.edu.unbosque.mundialhubbackend.model.StickerPackage$PackageStatus ) : java.util.List
+	{method}  {abstract} +findByUserUsernameOrderByAwardedAtDesc ( username : String ) : java.util.List
+}
+
+
+interface co.edu.unbosque.mundialhubbackend.repository.StickerRepository {
+	{method}  {abstract} +findByActiveTrueOrderByAlbumNumberAsc () : java.util.List
+	{method}  {abstract} +findByRarityAndActiveTrue ( rarity : co.edu.unbosque.mundialhubbackend.model.Sticker$StickerRarity ) : java.util.List
+	{method}  {abstract} +findBySectionAndActiveTrue ( section : String ) : java.util.List
+	{method}  {abstract} +findDistinctSections () : java.util.List
+	{method}  {abstract} +findMissingStickersForUser ( username : String ) : java.util.List
+}
+
+
+interface co.edu.unbosque.mundialhubbackend.repository.TeamRepository {
+	{method}  {abstract} +deleteByName ( name : String ) : void
+	{method}  {abstract} +existsByName ( name : String ) : boolean
+	{method}  {abstract} +findByName ( name : String ) : java.util.Optional
+}
+
+
+interface co.edu.unbosque.mundialhubbackend.repository.UserRepository {
+	{method}  {abstract} +existsByEmail ( email : String ) : boolean
+	{method}  {abstract} +findByEmail ( email : String ) : java.util.Optional
+	{method}  {abstract} +findByEmailAndPassword ( email : String , password : String ) : java.util.Optional
+	{method}  {abstract} +findByRole ( role : co.edu.unbosque.mundialhubbackend.model.User$Role ) : java.util.List
+	{method}  {abstract} +findByUsername ( username : String ) : java.util.Optional
+}
+
+
+interface co.edu.unbosque.mundialhubbackend.repository.UserStickerRepository {
+	{method}  {abstract} +countUniqueByUser ( username : String ) : long
+	{method}  {abstract} +existsByUserUsernameAndStickerId ( username : String , stickerId : Long ) : boolean
+	{method}  {abstract} +findByUserAndSection ( username : String , section : String ) : java.util.List
+	{method}  {abstract} +findByUserUsernameAndStickerId ( username : String , stickerId : Long ) : java.util.Optional
+	{method}  {abstract} +findByUserUsernameOrderByStickerAlbumNumberAsc ( username : String ) : java.util.List
+	{method}  {abstract} +findDuplicatesByUser ( username : String ) : java.util.List
+	{method}  {abstract} +findOfferedByUser ( username : String ) : java.util.List
+}
+
+
+class co.edu.unbosque.mundialhubbackend.security.JwtAuthenticationFilter {
+	{field} -userDetailsService : org.springframework.security.core.userdetails.UserDetailsService
+	{method} #doFilterInternal ( request : jakarta.servlet.http.HttpServletRequest , response : jakarta.servlet.http.HttpServletResponse , filterChain : jakarta.servlet.FilterChain ) : void
+}
+
+
+class co.edu.unbosque.mundialhubbackend.security.JwtUtil {
+	{field} {static} -JWT_TOKEN_VALIDITY : long
+	{field} -secret : String
+	{method} -createToken ( claims : java.util.Map , subject : String ) : String
+	{method} -extractAllClaims ( token : String ) : io.jsonwebtoken.Claims
+	{method} +extractClaim ( token : String , claimsResolver : java.util.function.Function ) : Object
+	{method} +extractExpiration ( token : String ) : java.util.Date
+	{method} +extractRole ( token : String ) : String
+	{method} +extractUsername ( token : String ) : String
+	{method} +generateToken ( userDetails : org.springframework.security.core.userdetails.UserDetails ) : String
+	{method} -getSigningKey () : java.security.Key
+	{method} -isTokenExpired ( token : String ) : Boolean
+	{method} +validateToken ( token : String , userDetails : org.springframework.security.core.userdetails.UserDetails ) : Boolean
+}
+
+
+class co.edu.unbosque.mundialhubbackend.security.SecurityConfig {
+	{field} -userDetailsService : org.springframework.security.core.userdetails.UserDetailsService
+	{method} +authenticationManager ( config : org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration ) : org.springframework.security.authentication.AuthenticationManager
+	{method} +authenticationProvider () : org.springframework.security.authentication.AuthenticationProvider
+	{method} +passwordEncoder () : org.springframework.security.crypto.password.PasswordEncoder
+	{method} +securityFilterChain ( http : org.springframework.security.config.annotation.web.builders.HttpSecurity ) : org.springframework.security.web.SecurityFilterChain
+}
+
+
+class co.edu.unbosque.mundialhubbackend.security.UserDetailsServiceImpl {
+	{method} +loadUserByUsername ( username : String ) : org.springframework.security.core.userdetails.UserDetails
+}
+
+
+class co.edu.unbosque.mundialhubbackend.service.AlbumService {
+	{field} -exchangeLifeTime : int
+	{field} -maxExchangePerDay : int
+	{field} -maxPackagePerDay : int
+	{field} -stickerPerPackage : int
+	{method} +awardActivityPackage ( username : String , source : co.edu.unbosque.mundialhubbackend.model.StickerPackage$PackageSource ) : int
+	{method} +awardWinnerPackage ( username : String ) : int
+	{method} +cancelExchange ( proposerUsername : String , exchangeId : Long ) : int
+	{method} -createPackage ( user : co.edu.unbosque.mundialhubbackend.model.User , source : co.edu.unbosque.mundialhubbackend.model.StickerPackage$PackageSource ) : void
+	{method} -drawStickers ( count : int ) : java.util.List
+	{method} +expireStaleExchanges () : void
+	{method} +getAlbum ( username : String , section : String ) : java.util.List
+	{method} +getAlbumSections ( username : String ) : java.util.Map
+	{method} +getDuplicates ( username : String ) : java.util.List
+	{method} +getIncomingExchanges ( username : String ) : java.util.List
+	{method} +getMyExchangeHistory ( username : String ) : java.util.List
+	{method} +getPendingPackages ( username : String ) : java.util.List
+	{method} +openPackage ( username : String , packageId : Long ) : [Ljava.lang.Object;
+	{method} -pickRarity ( roll : double ) : co.edu.unbosque.mundialhubbackend.model.Sticker$StickerRarity
+	{method} +proposeExchange ( proposerUsername : String , receiverUsername : String , offeredStickerId : Long , requestedStickerId : Long ) : int
+	{method} +redeemPromoCode ( username : String , code : String ) : int
+	{method} +respondExchange ( receiverUsername : String , exchangeId : Long , accepted : boolean ) : int
+	{method} -toExchangeDTO ( e : co.edu.unbosque.mundialhubbackend.model.StickerExchange ) : co.edu.unbosque.mundialhubbackend.dto.StickerExchangeDTO
+	{method} -toPackageDTO ( pkg : co.edu.unbosque.mundialhubbackend.model.StickerPackage ) : co.edu.unbosque.mundialhubbackend.dto.StickerPackageDTO
+	{method} -toStickerDTO ( s : co.edu.unbosque.mundialhubbackend.model.Sticker ) : co.edu.unbosque.mundialhubbackend.dto.StickerDTO
+	{method} -toUserStickerDTO ( us : co.edu.unbosque.mundialhubbackend.model.UserSticker ) : co.edu.unbosque.mundialhubbackend.dto.UserStickerDTO
+	{method} -transferSticker ( source : co.edu.unbosque.mundialhubbackend.model.UserSticker , destination : co.edu.unbosque.mundialhubbackend.model.User ) : void
+}
+
+
+class co.edu.unbosque.mundialhubbackend.service.ApiFootballService {
+	{field} {static} -BASE_URL : String
+	{field} {static} +WORLD_CUP_LEAGUE_ID : int
+	{field} {static} +WORLD_CUP_SEASON : int
+	{field} -apiKey : String
+	{field} -gson : com.google.gson.Gson
+	{field} -httpClient : java.net.http.HttpClient
+	{method} -executeAndParseResponse ( url : String ) : java.util.List
+	{method} +fetchAllFixtures () : java.util.List
+	{method} +fetchEventsByFixture ( fixtureId : Long ) : java.util.List
+	{method} +fetchFixtureById ( fixtureId : Long ) : com.google.gson.JsonObject
+	{method} +fetchFixturesByDate ( date : String ) : java.util.List
+	{method} +fetchFixturesByTeam ( teamId : Long ) : java.util.List
+	{method} +fetchLiveFixtures () : java.util.List
+}
+
+
+class co.edu.unbosque.mundialhubbackend.service.CommunityService {
+	{field} {static} -DEFAULT_EXPIRE_DAYS : int
+	{field} -revisar : String
+	{method} +createCommunity ( username : String , name : String , description : String ) : int
+	{method} +deactivateExpiredInvites () : void
+	{method} +generateInvite ( username : String , communityId : Long , maxUses : Integer , expireDays : Integer ) : [Ljava.lang.Object;
+	{method} +getActiveInvites ( username : String , communityId : Long ) : java.util.List
+	{method} +getCommunitiesForUser ( username : String ) : java.util.List
+	{method} +getCommunityById ( communityId : Long ) : co.edu.unbosque.mundialhubbackend.dto.CommunityDTO
+	{method} +isMember ( communityId : Long , username : String ) : boolean
+	{method} +joinByToken ( username : String , token : String ) : int
+	{method} +leaveCommunity ( username : String , communityId : Long ) : int
+	{method} +removeMember ( ownerUsername : String , communityId : Long , targetUsername : String ) : int
+	{method} +revokeInvite ( username : String , inviteId : Long ) : int
+	{method} -toCommunityDTO ( c : co.edu.unbosque.mundialhubbackend.model.Community ) : co.edu.unbosque.mundialhubbackend.dto.CommunityDTO
+	{method} -toCommunityDTOWithMembers ( c : co.edu.unbosque.mundialhubbackend.model.Community ) : co.edu.unbosque.mundialhubbackend.dto.CommunityDTO
+	{method} +toInviteDTO ( inv : co.edu.unbosque.mundialhubbackend.model.CommunityInvite ) : co.edu.unbosque.mundialhubbackend.dto.CommunityInviteDTO
+	{method} -toMemberDTO ( m : co.edu.unbosque.mundialhubbackend.model.CommunityMember ) : co.edu.unbosque.mundialhubbackend.dto.CommunityMemberDTO
+}
+
+
+class co.edu.unbosque.mundialhubbackend.service.EmailService {
+	{field} -javaMailSender : org.springframework.mail.javamail.JavaMailSender
+	{method} -buildHtmlConfirmBody ( username : String , code : String ) : String
+	{method} -buildHtmlConfirmedBody ( username : String ) : String
+	{method} +sendRegisterEmail ( to : String , code : String , username : String ) : void
+	{method} +sendWelcomeEmail ( to : String , username : String ) : void
+}
+
+
+class co.edu.unbosque.mundialhubbackend.service.FixtureService {
+	{field} {static} -FIXTURE_TTL_SECONDS : long
+	{field} {static} -LIVE_STATUSES : java.util.Set
+	{field} {static} -LIVE_TTL_SECONDS : long
+	{field} -modelMapper : org.modelmapper.ModelMapper
+	{method} +getAgendaForUser ( username : String ) : java.util.List
+	{method} +getAllFixtures () : java.util.List
+	{method} +getFixtureById ( id : Long ) : co.edu.unbosque.mundialhubbackend.dto.FixtureDTO
+	{method} +getFixturesByDate ( date : String ) : java.util.List
+	{method} +getLiveFixtures () : java.util.List
+	{method} -isCacheExpired ( f : co.edu.unbosque.mundialhubbackend.model.Fixture ) : boolean
+	{method} -nullableInt ( obj : com.google.gson.JsonObject , key : String ) : Integer
+	{method} -nullableString ( obj : com.google.gson.JsonObject , key : String ) : String
+	{method} +syncAllFixtures () : int
+	{method} -toDTO ( f : co.edu.unbosque.mundialhubbackend.model.Fixture , pendingUpdate : boolean ) : co.edu.unbosque.mundialhubbackend.dto.FixtureDTO
+	{method} -upsertFixture ( raw : com.google.gson.JsonObject ) : void
+	{method} -upsertFixtureWithEvents ( raw : com.google.gson.JsonObject ) : co.edu.unbosque.mundialhubbackend.model.Fixture
+}
+
+
+class co.edu.unbosque.mundialhubbackend.service.MatchService {
+	{field} -modelMapper : org.modelmapper.ModelMapper
+	{method} +createMatch ( request : co.edu.unbosque.mundialhubbackend.util.MatchCreateRequest ) : int
+	{method} +getAllMatches () : java.util.List
+	{method} +updateMatchResult ( request : co.edu.unbosque.mundialhubbackend.util.MatchResultRequest ) : int
+}
+
+
+class co.edu.unbosque.mundialhubbackend.service.PollService {
+	{field} {static} -CODE_CHARS : String
+	{field} {static} -CODE_LENGTH : int
+	{method} +calculateScoresForFixture ( fixtureId : Long ) : void
+	{method} +closeOpenPredictionsForStartedMatches () : void
+	{method} +createPoll ( username : String , pollName : String , communityId : Long ) : int
+	{method} +finishPoll ( pollId : Long ) : int
+	{method} -generateUniqueInviteCode () : String
+	{method} +getMyPredictions ( username : String , pollId : Long ) : java.util.List
+	{method} +getPollById ( pollId : Long ) : co.edu.unbosque.mundialhubbackend.dto.PollDTO
+	{method} +getPollsForUser ( username : String ) : java.util.List
+	{method} +getPredictionsForFixture ( pollId : Long , fixtureId : Long ) : java.util.List
+	{method} +getRanking ( pollId : Long ) : java.util.List
+	{method} -isMatchStarted ( status : String ) : boolean
+	{method} +joinPoll ( username : String , inviteCode : String ) : int
+	{method} -recalculateRanking ( pollId : Long ) : void
+	{method} +savePrediction ( username : String , pollId : Long , fixtureId : Long , homeGoals : int , awayGoals : int ) : int
+	{method} -score ( predHome : int , predAway : int , realHome : int , realAway : int ) : int
+	{method} -toPollDTO ( p : co.edu.unbosque.mundialhubbackend.model.Poll ) : co.edu.unbosque.mundialhubbackend.dto.PollDTO
+	{method} -toPollDTOWithMembers ( p : co.edu.unbosque.mundialhubbackend.model.Poll ) : co.edu.unbosque.mundialhubbackend.dto.PollDTO
+	{method} -toPollMemberDTO ( m : co.edu.unbosque.mundialhubbackend.model.PollMember ) : co.edu.unbosque.mundialhubbackend.dto.PollMemberDTO
+	{method} -toPredictionDTO ( p : co.edu.unbosque.mundialhubbackend.model.Prediction ) : co.edu.unbosque.mundialhubbackend.dto.PredictionDTO
+}
+
+
+class co.edu.unbosque.mundialhubbackend.service.PreferenceService {
+	{field} -modelMapper : org.modelmapper.ModelMapper
+	{method} +addStadiumsToFavorites ( username : String , ids : java.util.List ) : int
+	{method} +addTeamsToFavorites ( username : String , ids : java.util.List ) : int
+	{method} +getFavoriteStadiums ( username : String ) : java.util.List
+	{method} +getFavoriteTeams ( username : String ) : java.util.List
+	{method} +removeStadiumsFromFavorites ( username : String , ids : java.util.List ) : int
+	{method} +removeTeamsFromFavorites ( username : String , ids : java.util.List ) : int
+	{method} +updateFavoriteStadiums ( username : String , ids : java.util.List ) : int
+	{method} +updateFavoriteTeams ( username : String , ids : java.util.List ) : int
+}
+
+
+class co.edu.unbosque.mundialhubbackend.service.StadiumService {
+	{field} -modelMapper : org.modelmapper.ModelMapper
+	{method} +create ( dto : co.edu.unbosque.mundialhubbackend.dto.StadiumDTO ) : int
+	{method} +deleteByName ( name : String ) : int
+	{method} +getAll () : java.util.List
+	{method} +getByName ( name : String ) : co.edu.unbosque.mundialhubbackend.dto.StadiumDTO
+	{method} +updateByName ( name : String , dto : co.edu.unbosque.mundialhubbackend.dto.StadiumDTO ) : int
+}
+
+
+class co.edu.unbosque.mundialhubbackend.service.TeamService {
+	{field} -modelMapper : org.modelmapper.ModelMapper
+	{method} +create ( dto : co.edu.unbosque.mundialhubbackend.dto.TeamDTO ) : int
+	{method} +deleteByName ( name : String ) : int
+	{method} +getAll () : java.util.List
+	{method} +getByName ( name : String ) : co.edu.unbosque.mundialhubbackend.dto.TeamDTO
+	{method} +updateByName ( name : String , dto : co.edu.unbosque.mundialhubbackend.dto.TeamDTO ) : int
+}
+
+
+class co.edu.unbosque.mundialhubbackend.service.UserService {
+	{field} -modelMapper : org.modelmapper.ModelMapper
+	{field} -passwordEncoder : org.springframework.security.crypto.password.PasswordEncoder
+	{method} +confirmRegistration ( email : String , code : String ) : int
+	{method} +create ( data : co.edu.unbosque.mundialhubbackend.util.RegisterRequest ) : int
+	{method} +createForAdmin ( data : co.edu.unbosque.mundialhubbackend.util.RegisterRequest ) : int
+	{method} -decrypt ( dto : co.edu.unbosque.mundialhubbackend.dto.UserDTO ) : co.edu.unbosque.mundialhubbackend.model.User
+	{method} +deleteByEmail ( dto : co.edu.unbosque.mundialhubbackend.util.ParameterEmailRequest ) : int
+	{method} +deleteById ( id : Long ) : int
+	{method} -encrypt ( e : co.edu.unbosque.mundialhubbackend.model.User ) : co.edu.unbosque.mundialhubbackend.dto.UserDTO
+	{method} +findAll () : java.util.ArrayList
+	{method} +findUsernameAlreadyTaken ( username : String ) : boolean
+	{method} +getAccountByEmail ( in : co.edu.unbosque.mundialhubbackend.util.ParameterEmailRequest ) : co.edu.unbosque.mundialhubbackend.dto.UserDTO
+	{method} +resendConfirmRegistration ( data : co.edu.unbosque.mundialhubbackend.util.ParameterEmailRequest ) : int
+	{method} +updateByEmail ( old : co.edu.unbosque.mundialhubbackend.util.ParameterEmailRequest , newAccount : co.edu.unbosque.mundialhubbackend.util.RegisterRequest ) : int
+}
+
+
+class co.edu.unbosque.mundialhubbackend.util.AESUtil {
+	{field} {static} -ALGORITMO : String
+	{field} {static} -TIPOCIFRADO : String
+	{method}  {static} +decrypt ( encrypted : String ) : String
+	{method}  {static} +decrypt ( llave : String , iv : String , encrypted : String ) : String
+	{method}  {static} +encrypt ( plainText : String ) : String
+	{method}  {static} +encrypt ( llave : String , iv : String , texto : String ) : String
+	{method}  {static} +hashingToMD5 ( content : String ) : String
+	{method}  {static} +hashingToSHA1 ( content : String ) : String
+	{method}  {static} +hashingToSHA256 ( content : String ) : String
+	{method}  {static} +hashingToSHA384 ( content : String ) : String
+	{method}  {static} +hashingToSHA512 ( content : String ) : String
+}
+
+
+class co.edu.unbosque.mundialhubbackend.util.AccountUpdateRequest {
+}
+
+
+class co.edu.unbosque.mundialhubbackend.util.AlbumDetailRequest {
+	{field} +section : String
+}
+
+
+class co.edu.unbosque.mundialhubbackend.util.ConfirmEmailRequest {
+	{field} +code : String
+	{field} +email : String
+}
+
+
+class co.edu.unbosque.mundialhubbackend.util.CreateCommunityRequest {
+	{field} +description : String
+	{field} +name : String
+}
+
+
+class co.edu.unbosque.mundialhubbackend.util.CreatePollRequest {
+	{field} +communityId : Long
+	{field} +name : String
+}
+
+
+class co.edu.unbosque.mundialhubbackend.util.FinishPollRequest {
+	{field} +pollId : Long
+}
+
+
+class co.edu.unbosque.mundialhubbackend.util.GenerateInviteRequest {
+	{field} +communityId : Long
+	{field} +expireDays : Integer
+	{field} +maxUses : Integer
+}
+
+
+class co.edu.unbosque.mundialhubbackend.util.GetFixturesRequest {
+	{field} +date : String
+	{field} +fixtureId : Long
+}
+
+
+class co.edu.unbosque.mundialhubbackend.util.JoinCommunityRequest {
+	{field} +token : String
+}
+
+
+class co.edu.unbosque.mundialhubbackend.util.JoinPollRequest {
+	{field} +inviteCode : String
+}
+
+
+class co.edu.unbosque.mundialhubbackend.util.LoginRequest {
+	{field} +password : String
+	{field} +username : String
+}
+
+
+class co.edu.unbosque.mundialhubbackend.util.MatchCreateRequest {
+	{field} +awayTeamId : Long
+	{field} +homeTeamId : Long
+	{field} +matchDate : java.time.LocalDateTime
+	{field} +stadiumId : Long
+}
+
+
+class co.edu.unbosque.mundialhubbackend.util.MatchResultRequest {
+	{field} +awayScore : Integer
+	{field} +homeScore : Integer
+	{field} +id : long
+}
+
+
+class co.edu.unbosque.mundialhubbackend.util.OpenPackageRequest {
+	{field} +packageId : Long
+}
+
+
+class co.edu.unbosque.mundialhubbackend.util.ParameterEmailRequest {
+	{field} +email : String
+}
+
+
+class co.edu.unbosque.mundialhubbackend.util.PreferenceRequest {
+	{field} +id : java.util.ArrayList
+}
+
+
+class co.edu.unbosque.mundialhubbackend.util.ProposeExchangeRequest {
+	{field} +offeredStickerId : Long
+	{field} +receiverUsername : String
+	{field} +requestedStickerId : Long
+}
+
+
+class co.edu.unbosque.mundialhubbackend.util.RedeemPromoRequest {
+	{field} +promoCode : String
+}
+
+
+class co.edu.unbosque.mundialhubbackend.util.RegisterRequest {
+	{field} +email : String
+	{field} +name : String
+	{field} +password : String
+	{field} +username : String
+}
+
+
+class co.edu.unbosque.mundialhubbackend.util.RemoveMemberRequest {
+	{field} +communityId : Long
+	{field} +targetUsername : String
+}
+
+
+class co.edu.unbosque.mundialhubbackend.util.RespondExchangeRequest {
+	{field} +accepted : boolean
+	{field} +exchangeId : Long
+}
+
+
+class co.edu.unbosque.mundialhubbackend.util.RevokeInviteRequest {
+	{field} +inviteId : Long
+}
+
+
+class co.edu.unbosque.mundialhubbackend.util.SavePredictionRequest {
+	{field} +fixtureId : Long
+	{field} +pollId : Long
+	{field} +predictedAwayGoals : Integer
+	{field} +predictedHomeGoals : Integer
+}
+
+
+
+
+co.edu.unbosque.mundialhubbackend.controller.AlbumController -->  co.edu.unbosque.mundialhubbackend.security.JwtUtil : jwtUtil
+co.edu.unbosque.mundialhubbackend.controller.AlbumController -->  co.edu.unbosque.mundialhubbackend.service.AlbumService : albumService
+co.edu.unbosque.mundialhubbackend.controller.AuthController *--  co.edu.unbosque.mundialhubbackend.security.JwtUtil : jwtUtil
+co.edu.unbosque.mundialhubbackend.controller.AuthController *--  co.edu.unbosque.mundialhubbackend.service.UserService : userService
+co.edu.unbosque.mundialhubbackend.controller.CommunityController -->  co.edu.unbosque.mundialhubbackend.security.JwtUtil : jwtUtil
+co.edu.unbosque.mundialhubbackend.controller.CommunityController -->  co.edu.unbosque.mundialhubbackend.service.CommunityService : communityService
+co.edu.unbosque.mundialhubbackend.controller.FixtureController -->  co.edu.unbosque.mundialhubbackend.security.JwtUtil : jwtUtil
+co.edu.unbosque.mundialhubbackend.controller.FixtureController -->  co.edu.unbosque.mundialhubbackend.service.FixtureService : fixtureService
+co.edu.unbosque.mundialhubbackend.controller.MatchController -->  co.edu.unbosque.mundialhubbackend.service.MatchService : matchService
+co.edu.unbosque.mundialhubbackend.controller.PollController -->  co.edu.unbosque.mundialhubbackend.security.JwtUtil : jwtUtil
+co.edu.unbosque.mundialhubbackend.controller.PollController -->  co.edu.unbosque.mundialhubbackend.service.PollService : pollService
+co.edu.unbosque.mundialhubbackend.controller.PreferenceController -->  co.edu.unbosque.mundialhubbackend.security.JwtUtil : jwtUtil
+co.edu.unbosque.mundialhubbackend.controller.PreferenceController -->  co.edu.unbosque.mundialhubbackend.service.PreferenceService : preferenceService
+co.edu.unbosque.mundialhubbackend.controller.StadiumController -->  co.edu.unbosque.mundialhubbackend.service.StadiumService : stadiumService
+co.edu.unbosque.mundialhubbackend.controller.TeamController -->  co.edu.unbosque.mundialhubbackend.service.TeamService : teamService
+co.edu.unbosque.mundialhubbackend.controller.UserController -->  co.edu.unbosque.mundialhubbackend.security.JwtUtil : jwtUtil
+co.edu.unbosque.mundialhubbackend.controller.UserController -->  co.edu.unbosque.mundialhubbackend.service.UserService : accountServ
+co.edu.unbosque.mundialhubbackend.dto.CommunityDTO "1" o-- "0..*"  co.edu.unbosque.mundialhubbackend.dto.CommunityMemberDTO : members
+co.edu.unbosque.mundialhubbackend.dto.CommunityMemberDTO -->  co.edu.unbosque.mundialhubbackend.model.CommunityMember$CommunityRole : role
+co.edu.unbosque.mundialhubbackend.dto.FixtureDTO "1" o-- "0..*"  co.edu.unbosque.mundialhubbackend.dto.FixtureEventDTO : events
+co.edu.unbosque.mundialhubbackend.dto.MatchDTO -->  co.edu.unbosque.mundialhubbackend.dto.StadiumDTO : stadium
+co.edu.unbosque.mundialhubbackend.dto.MatchDTO -->  co.edu.unbosque.mundialhubbackend.dto.TeamDTO : awayTeam
+co.edu.unbosque.mundialhubbackend.dto.MatchDTO -->  co.edu.unbosque.mundialhubbackend.dto.TeamDTO : homeTeam
+co.edu.unbosque.mundialhubbackend.dto.MatchDTO -->  co.edu.unbosque.mundialhubbackend.model.Match$MatchStatus : status
+co.edu.unbosque.mundialhubbackend.dto.PollDTO "1" o-- "0..*"  co.edu.unbosque.mundialhubbackend.dto.PollMemberDTO : members
+co.edu.unbosque.mundialhubbackend.dto.PollDTO -->  co.edu.unbosque.mundialhubbackend.model.Poll$PollStatus : status
+co.edu.unbosque.mundialhubbackend.dto.PollMemberDTO "1" o-- "0..*"  co.edu.unbosque.mundialhubbackend.dto.PredictionDTO : predictions
+co.edu.unbosque.mundialhubbackend.dto.StickerDTO -->  co.edu.unbosque.mundialhubbackend.model.Sticker$StickerCategory : category
+co.edu.unbosque.mundialhubbackend.dto.StickerDTO -->  co.edu.unbosque.mundialhubbackend.model.Sticker$StickerRarity : rarity
+co.edu.unbosque.mundialhubbackend.dto.StickerExchangeDTO -->  co.edu.unbosque.mundialhubbackend.dto.StickerDTO : offeredSticker
+co.edu.unbosque.mundialhubbackend.dto.StickerExchangeDTO -->  co.edu.unbosque.mundialhubbackend.dto.StickerDTO : requestedSticker
+co.edu.unbosque.mundialhubbackend.dto.StickerExchangeDTO -->  co.edu.unbosque.mundialhubbackend.model.StickerExchange$ExchangeStatus : status
+co.edu.unbosque.mundialhubbackend.dto.StickerPackageDTO "1" o-- "0..*"  co.edu.unbosque.mundialhubbackend.dto.StickerDTO : revealedStickers
+co.edu.unbosque.mundialhubbackend.dto.StickerPackageDTO -->  co.edu.unbosque.mundialhubbackend.model.StickerPackage$PackageSource : source
+co.edu.unbosque.mundialhubbackend.dto.StickerPackageDTO -->  co.edu.unbosque.mundialhubbackend.model.StickerPackage$PackageStatus : status
+co.edu.unbosque.mundialhubbackend.dto.UserDTO "1" o-- "0..*"  co.edu.unbosque.mundialhubbackend.dto.StadiumDTO : favoriteStadiums
+co.edu.unbosque.mundialhubbackend.dto.UserDTO "1" o-- "0..*"  co.edu.unbosque.mundialhubbackend.dto.TeamDTO : favoriteTeams
+co.edu.unbosque.mundialhubbackend.dto.UserDTO -->  co.edu.unbosque.mundialhubbackend.model.User$Role : role
+co.edu.unbosque.mundialhubbackend.dto.UserDTO -->  co.edu.unbosque.mundialhubbackend.model.User$UserStatus : status
+co.edu.unbosque.mundialhubbackend.dto.UserStickerDTO -->  co.edu.unbosque.mundialhubbackend.dto.StickerDTO : sticker
+co.edu.unbosque.mundialhubbackend.model.Community "1" o-- "0..*"  co.edu.unbosque.mundialhubbackend.model.CommunityInvite : invites
+co.edu.unbosque.mundialhubbackend.model.Community "1" o-- "0..*"  co.edu.unbosque.mundialhubbackend.model.CommunityMember : members
+co.edu.unbosque.mundialhubbackend.model.Community "1" o-- "0..*"  co.edu.unbosque.mundialhubbackend.model.Poll : polls
+co.edu.unbosque.mundialhubbackend.model.Community -->  co.edu.unbosque.mundialhubbackend.model.User :  @ManyToOne\nowner
+co.edu.unbosque.mundialhubbackend.model.CommunityInvite -->  co.edu.unbosque.mundialhubbackend.model.Community :  @ManyToOne\ncommunity
+co.edu.unbosque.mundialhubbackend.model.CommunityInvite -->  co.edu.unbosque.mundialhubbackend.model.User :  @ManyToOne\ncreatedBy
+co.edu.unbosque.mundialhubbackend.model.CommunityMember -->  co.edu.unbosque.mundialhubbackend.model.Community :  @ManyToOne\ncommunity
+co.edu.unbosque.mundialhubbackend.model.CommunityMember -->  co.edu.unbosque.mundialhubbackend.model.CommunityMember$CommunityRole : role
+co.edu.unbosque.mundialhubbackend.model.CommunityMember -->  co.edu.unbosque.mundialhubbackend.model.User :  @ManyToOne\nuser
+co.edu.unbosque.mundialhubbackend.model.Fixture "1" o-- "0..*"  co.edu.unbosque.mundialhubbackend.model.FixtureEvent : events
+co.edu.unbosque.mundialhubbackend.model.FixtureEvent -->  co.edu.unbosque.mundialhubbackend.model.Fixture :  @ManyToOne\nfixture
+co.edu.unbosque.mundialhubbackend.model.Match -->  co.edu.unbosque.mundialhubbackend.model.Match$MatchStatus :  @Column("")\nstatus
+co.edu.unbosque.mundialhubbackend.model.Match -->  co.edu.unbosque.mundialhubbackend.model.Stadium :  @ManyToOne\nstadium
+co.edu.unbosque.mundialhubbackend.model.Match -->  co.edu.unbosque.mundialhubbackend.model.Team :  @ManyToOne\nawayTeam
+co.edu.unbosque.mundialhubbackend.model.Match -->  co.edu.unbosque.mundialhubbackend.model.Team :  @ManyToOne\nhomeTeam
+co.edu.unbosque.mundialhubbackend.model.Poll "1" o-- "0..*"  co.edu.unbosque.mundialhubbackend.model.PollMember : members
+co.edu.unbosque.mundialhubbackend.model.Poll -->  co.edu.unbosque.mundialhubbackend.model.Community :  @ManyToOne\ncommunity
+co.edu.unbosque.mundialhubbackend.model.Poll -->  co.edu.unbosque.mundialhubbackend.model.Poll$PollStatus : status
+co.edu.unbosque.mundialhubbackend.model.Poll -->  co.edu.unbosque.mundialhubbackend.model.User :  @ManyToOne\ncreator
+co.edu.unbosque.mundialhubbackend.model.PollMember "1" o-- "0..*"  co.edu.unbosque.mundialhubbackend.model.Prediction : predictions
+co.edu.unbosque.mundialhubbackend.model.PollMember -->  co.edu.unbosque.mundialhubbackend.model.Poll :  @ManyToOne\npoll
+co.edu.unbosque.mundialhubbackend.model.PollMember -->  co.edu.unbosque.mundialhubbackend.model.User :  @ManyToOne\nuser
+co.edu.unbosque.mundialhubbackend.model.Prediction -->  co.edu.unbosque.mundialhubbackend.model.Fixture :  @ManyToOne\nfixture
+co.edu.unbosque.mundialhubbackend.model.Prediction -->  co.edu.unbosque.mundialhubbackend.model.PollMember :  @ManyToOne\npollMember
+co.edu.unbosque.mundialhubbackend.model.PromoRedemption -->  co.edu.unbosque.mundialhubbackend.model.PromotionalCode :  @ManyToOne\ncode
+co.edu.unbosque.mundialhubbackend.model.PromoRedemption -->  co.edu.unbosque.mundialhubbackend.model.User :  @ManyToOne\nuser
+co.edu.unbosque.mundialhubbackend.model.PromotionalCode "1" o-- "0..*"  co.edu.unbosque.mundialhubbackend.model.PromoRedemption : redemptions
+co.edu.unbosque.mundialhubbackend.model.PromotionalCode -->  co.edu.unbosque.mundialhubbackend.model.User :  @ManyToOne\ncreatedBy
+co.edu.unbosque.mundialhubbackend.model.Sticker -->  co.edu.unbosque.mundialhubbackend.model.Sticker$StickerCategory : category
+co.edu.unbosque.mundialhubbackend.model.Sticker -->  co.edu.unbosque.mundialhubbackend.model.Sticker$StickerRarity : rarity
+co.edu.unbosque.mundialhubbackend.model.StickerExchange -->  co.edu.unbosque.mundialhubbackend.model.Sticker :  @ManyToOne\nofferedSticker
+co.edu.unbosque.mundialhubbackend.model.StickerExchange -->  co.edu.unbosque.mundialhubbackend.model.Sticker :  @ManyToOne\nrequestedSticker
+co.edu.unbosque.mundialhubbackend.model.StickerExchange -->  co.edu.unbosque.mundialhubbackend.model.StickerExchange$ExchangeStatus : status
+co.edu.unbosque.mundialhubbackend.model.StickerExchange -->  co.edu.unbosque.mundialhubbackend.model.User :  @ManyToOne\nproposer
+co.edu.unbosque.mundialhubbackend.model.StickerExchange -->  co.edu.unbosque.mundialhubbackend.model.User :  @ManyToOne\nreceiver
+co.edu.unbosque.mundialhubbackend.model.StickerPackage "1" o-- "0..*"  co.edu.unbosque.mundialhubbackend.model.Sticker : revealedStickers
+co.edu.unbosque.mundialhubbackend.model.StickerPackage -->  co.edu.unbosque.mundialhubbackend.model.StickerPackage$PackageSource : source
+co.edu.unbosque.mundialhubbackend.model.StickerPackage -->  co.edu.unbosque.mundialhubbackend.model.StickerPackage$PackageStatus : status
+co.edu.unbosque.mundialhubbackend.model.StickerPackage -->  co.edu.unbosque.mundialhubbackend.model.User :  @ManyToOne\nuser
+co.edu.unbosque.mundialhubbackend.model.User "1" o-- "0..*"  co.edu.unbosque.mundialhubbackend.model.Stadium : favoriteStadiums
+co.edu.unbosque.mundialhubbackend.model.User "1" o-- "0..*"  co.edu.unbosque.mundialhubbackend.model.Team : favoriteTeams
+co.edu.unbosque.mundialhubbackend.model.User -->  co.edu.unbosque.mundialhubbackend.model.User$Role : role
+co.edu.unbosque.mundialhubbackend.model.User -->  co.edu.unbosque.mundialhubbackend.model.User$UserStatus : status
+co.edu.unbosque.mundialhubbackend.model.UserSticker -->  co.edu.unbosque.mundialhubbackend.model.Sticker :  @ManyToOne\nsticker
+co.edu.unbosque.mundialhubbackend.model.UserSticker -->  co.edu.unbosque.mundialhubbackend.model.User :  @ManyToOne\nuser
+co.edu.unbosque.mundialhubbackend.security.JwtAuthenticationFilter *--  co.edu.unbosque.mundialhubbackend.security.JwtUtil : jwtUtil
+co.edu.unbosque.mundialhubbackend.security.SecurityConfig *--  co.edu.unbosque.mundialhubbackend.security.JwtAuthenticationFilter : jwtAuthFilter
+co.edu.unbosque.mundialhubbackend.security.UserDetailsServiceImpl *--  co.edu.unbosque.mundialhubbackend.repository.UserRepository : userRepository
+co.edu.unbosque.mundialhubbackend.service.AlbumService "1" o-- "0..*"  co.edu.unbosque.mundialhubbackend.model.Sticker$StickerRarity : probabilities
+co.edu.unbosque.mundialhubbackend.service.AlbumService -->  co.edu.unbosque.mundialhubbackend.repository.PromoRedemptionRepository : promoRedemptionRepository
+co.edu.unbosque.mundialhubbackend.service.AlbumService -->  co.edu.unbosque.mundialhubbackend.repository.PromotionalCodeRepository : promoRepository
+co.edu.unbosque.mundialhubbackend.service.AlbumService -->  co.edu.unbosque.mundialhubbackend.repository.StickerExchangeRepository : exchangeRepository
+co.edu.unbosque.mundialhubbackend.service.AlbumService -->  co.edu.unbosque.mundialhubbackend.repository.StickerPackageRepository : packageRepository
+co.edu.unbosque.mundialhubbackend.service.AlbumService -->  co.edu.unbosque.mundialhubbackend.repository.StickerRepository : stickerRepository
+co.edu.unbosque.mundialhubbackend.service.AlbumService -->  co.edu.unbosque.mundialhubbackend.repository.UserRepository : userRepository
+co.edu.unbosque.mundialhubbackend.service.AlbumService -->  co.edu.unbosque.mundialhubbackend.repository.UserStickerRepository : userStickerRepository
+co.edu.unbosque.mundialhubbackend.service.CommunityService -->  co.edu.unbosque.mundialhubbackend.repository.CommunityInviteRepository : communityInviteRepository
+co.edu.unbosque.mundialhubbackend.service.CommunityService -->  co.edu.unbosque.mundialhubbackend.repository.CommunityMemberRepository : communityMemberRepository
+co.edu.unbosque.mundialhubbackend.service.CommunityService -->  co.edu.unbosque.mundialhubbackend.repository.CommunityRepository : communityRepository
+co.edu.unbosque.mundialhubbackend.service.CommunityService -->  co.edu.unbosque.mundialhubbackend.repository.UserRepository : userRepository
+co.edu.unbosque.mundialhubbackend.service.FixtureService -->  co.edu.unbosque.mundialhubbackend.repository.FixtureEventRepository : fixtureEventRepository
+co.edu.unbosque.mundialhubbackend.service.FixtureService -->  co.edu.unbosque.mundialhubbackend.repository.FixtureRepository : fixtureRepository
+co.edu.unbosque.mundialhubbackend.service.FixtureService -->  co.edu.unbosque.mundialhubbackend.repository.UserRepository : userRepository
+co.edu.unbosque.mundialhubbackend.service.FixtureService -->  co.edu.unbosque.mundialhubbackend.service.ApiFootballService : apiFootballService
+co.edu.unbosque.mundialhubbackend.service.MatchService -->  co.edu.unbosque.mundialhubbackend.repository.MatchRepository : matchRepository
+co.edu.unbosque.mundialhubbackend.service.MatchService -->  co.edu.unbosque.mundialhubbackend.repository.StadiumRepository : stadiumRepository
+co.edu.unbosque.mundialhubbackend.service.MatchService -->  co.edu.unbosque.mundialhubbackend.repository.TeamRepository : teamRepository
+co.edu.unbosque.mundialhubbackend.service.PollService -->  co.edu.unbosque.mundialhubbackend.repository.CommunityRepository : communityRepository
+co.edu.unbosque.mundialhubbackend.service.PollService -->  co.edu.unbosque.mundialhubbackend.repository.FixtureRepository : fixtureRepository
+co.edu.unbosque.mundialhubbackend.service.PollService -->  co.edu.unbosque.mundialhubbackend.repository.PollMemberRepository : pollMemberRepository
+co.edu.unbosque.mundialhubbackend.service.PollService -->  co.edu.unbosque.mundialhubbackend.repository.PollRepository : pollRepository
+co.edu.unbosque.mundialhubbackend.service.PollService -->  co.edu.unbosque.mundialhubbackend.repository.PredictionRepository : predictionRepository
+co.edu.unbosque.mundialhubbackend.service.PollService -->  co.edu.unbosque.mundialhubbackend.repository.UserRepository : userRepository
+co.edu.unbosque.mundialhubbackend.service.PollService -->  co.edu.unbosque.mundialhubbackend.service.CommunityService : communityService
+co.edu.unbosque.mundialhubbackend.service.PreferenceService -->  co.edu.unbosque.mundialhubbackend.repository.StadiumRepository : stadiumRepository
+co.edu.unbosque.mundialhubbackend.service.PreferenceService -->  co.edu.unbosque.mundialhubbackend.repository.TeamRepository : teamRepository
+co.edu.unbosque.mundialhubbackend.service.PreferenceService -->  co.edu.unbosque.mundialhubbackend.repository.UserRepository : userRepository
+co.edu.unbosque.mundialhubbackend.service.StadiumService -->  co.edu.unbosque.mundialhubbackend.repository.StadiumRepository : stadiumRepository
+co.edu.unbosque.mundialhubbackend.service.TeamService -->  co.edu.unbosque.mundialhubbackend.repository.TeamRepository : teamRepository
+co.edu.unbosque.mundialhubbackend.service.UserService -->  co.edu.unbosque.mundialhubbackend.repository.UserRepository : userRepo
+co.edu.unbosque.mundialhubbackend.service.UserService -->  co.edu.unbosque.mundialhubbackend.service.EmailService : emailService
+co.edu.unbosque.mundialhubbackend.util.AccountUpdateRequest -->  co.edu.unbosque.mundialhubbackend.util.ParameterEmailRequest : oldOne
+co.edu.unbosque.mundialhubbackend.util.AccountUpdateRequest -->  co.edu.unbosque.mundialhubbackend.util.RegisterRequest : newOne
+co.edu.unbosque.mundialhubbackend.util.RegisterRequest -->  co.edu.unbosque.mundialhubbackend.model.User$Role : role
+
+hide methods
+
+@enduml

@@ -1,0 +1,16 @@
+﻿<header class="app-header" *ngIf="auth.isAuthenticated()">
+  <div class="brand">Mundial Hub</div>
+  <nav>
+    <a routerLink="/dashboard">Inicio</a>
+    <a routerLink="/teams">Equipos</a>
+    <a routerLink="/matches">Partidos</a>
+    <a routerLink="/stickers">Álbum</a>
+    <a routerLink="/communities">Comunidades</a>
+    <a routerLink="/polls">Pollas</a>
+    <span class="user-info" *ngIf="auth.getUserRole()">Rol: {{ auth.getUserRole() }}</span>
+    <button type="button" class="logout" (click)="logout()">Cerrar sesión</button>
+  </nav>
+</header>
+<main class="app-main">
+  <router-outlet></router-outlet>
+</main>
