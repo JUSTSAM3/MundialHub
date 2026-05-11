@@ -11,10 +11,10 @@ import { AuthService } from '../services/auth.service';
     <section class="dashboard-card">
       <div class="dashboard-header">
         <h1>🌍 Bienvenido a Mundial Hub</h1>
-        <p *ngIf="userRole" class="user-role">Rol: <strong>{{ userRole }}</strong></p>
+        <p *ngIf="userRole" class="user-role">Rol: <strong>{{ getRoleLabel(userRole) }}</strong></p>
       </div>
 
-      <!-- Paneles comunes para todos los usuarios -->
+      <!-- Navegación Principal -->
       <div class="section-title">Navegación Principal</div>
       <div class="grid grid-4">
         <a routerLink="/teams" class="card-link">
@@ -39,25 +39,36 @@ import { AuthService } from '../services/auth.service';
         </a>
       </div>
 
-      <!-- Paneles adicionales para ADMIN y OPERATOR -->
-      <div *ngIf="userRole === 'ADMIN' || userRole === 'OPERATOR'" class="admin-section">
-        <div class="section-title">⚙️ Panel de Gestión</div>
+      <!-- Panel de Administración ADMIN -->
+      <div *ngIf="userRole === 'ADMIN'" class="admin-section">
+        <div class="section-title">⚙️ Panel de Administración</div>
         <div class="grid grid-4">
-          <a routerLink="/admin/teams" *ngIf="userRole === 'ADMIN'" class="card-link admin-link">
-            <span class="icon">🏆</span>
-            <span>Gestionar Equipos</span>
+          <a routerLink="/admin" class="card-link admin-link">
+            <span class="icon">📊</span>
+            <span>Dashboard Admin</span>
           </a>
-          <a routerLink="/admin/matches" *ngIf="userRole === 'ADMIN' || userRole === 'OPERATOR'" class="card-link admin-link">
-            <span class="icon">📋</span>
-            <span>Gestionar Partidos</span>
-          </a>
-          <a routerLink="/admin/communities" *ngIf="userRole === 'ADMIN'" class="card-link admin-link">
+          <a routerLink="/admin/users" class="card-link admin-link">
             <span class="icon">👥</span>
-            <span>Gestionar Comunidades</span>
+            <span>Gestionar Usuarios</span>
           </a>
-          <a routerLink="/admin/polls" *ngIf="userRole === 'ADMIN'" class="card-link admin-link">
-            <span class="icon">⚙️</span>
-            <span>Gestionar Pollas</span>
+          <a routerLink="/admin/stats" class="card-link admin-link">
+            <span class="icon">📈</span>
+            <span>Estadísticas</span>
+          </a>
+          <a routerLink="/admin/system" class="card-link admin-link">
+            <span class="icon">🛠️</span>
+            <span>Configuración</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Panel de Operador OPERATOR -->
+      <div *ngIf="userRole === 'OPERATOR'" class="operator-section">
+        <div class="section-title">📋 Panel de Operador</div>
+        <div class="grid grid-4">
+          <a routerLink="/admin/matches" class="card-link operator-link">
+            <span class="icon">🎯</span>
+            <span>Gestionar Partidos</span>
           </a>
         </div>
       </div>
@@ -155,6 +166,14 @@ import { AuthService } from '../services/auth.service';
       border-top: 2px solid rgba(249, 115, 22, 0.2);
     }
 
+    .section-title {
+      color: #f97316;
+    }
+
+    .admin-section .section-title {
+      color: #f97316;
+    }
+
     .card-link.admin-link {
       background: linear-gradient(135deg, rgba(249, 115, 22, 0.1) 0%, rgba(245, 158, 11, 0.05) 100%);
       border-color: rgba(249, 115, 22, 0.3);
@@ -165,6 +184,29 @@ import { AuthService } from '../services/auth.service';
       background: linear-gradient(135deg, rgba(249, 115, 22, 0.2) 0%, rgba(245, 158, 11, 0.1) 100%);
       border-color: rgba(249, 115, 22, 0.6);
       box-shadow: 0 10px 30px rgba(249, 115, 22, 0.2);
+    }
+
+    /* Operator Panel */
+    .operator-section {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 2px solid rgba(14, 165, 233, 0.2);
+    }
+
+    .operator-section .section-title {
+      color: #0ea5e9;
+    }
+
+    .card-link.operator-link {
+      background: linear-gradient(135deg, rgba(14, 165, 233, 0.1) 0%, rgba(6, 182, 212, 0.05) 100%);
+      border-color: rgba(14, 165, 233, 0.3);
+      color: #0ea5e9;
+    }
+
+    .card-link.operator-link:hover {
+      background: linear-gradient(135deg, rgba(14, 165, 233, 0.2) 0%, rgba(6, 182, 212, 0.1) 100%);
+      border-color: rgba(14, 165, 233, 0.6);
+      box-shadow: 0 10px 30px rgba(14, 165, 233, 0.2);
     }
 
     @media (max-width: 768px) {
@@ -199,5 +241,14 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     const role = this.auth.getUserRole();
     this.userRole = Array.isArray(role) ? role[0] : role;
+  }
+
+  getRoleLabel(role: string): string {
+    const labels: any = {
+      'ADMIN': 'Administrador',
+      'OPERATOR': 'Operador',
+      'USER': 'Usuario'
+    };
+    return labels[role] || role;
   }
 }

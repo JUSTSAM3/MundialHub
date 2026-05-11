@@ -25,5 +25,15 @@ export const ApiService = {
   getMatches: () => api.get('/match/getall'),
   getAlbum: () => api.post('/album/view', { section: null }),
   getCommunities: () => api.get('/communities/mine'),
-  getPolls: () => api.get('/polls/mine')
+  getPolls: () => api.get('/polls/mine'),
+  
+  // Admin endpoints
+  getAllUsers: () => api.get('/user/getall'),
+  createUser: (user: Record<string, unknown>) => api.post('/user/create', user),
+  deleteUser: (id: number) => api.delete(`/user/deletebyid/${id}`),
+  updateUser: (user: Record<string, unknown>) => api.put('/user/updatebyemailbyjson', {
+    oldOne: { email: user.email },
+    newOne: user
+  }),
+  getUserByEmail: (email: string) => api.post('/user/getaccountbyemail', { email })
 };

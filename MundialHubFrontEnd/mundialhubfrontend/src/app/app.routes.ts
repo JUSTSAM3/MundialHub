@@ -7,7 +7,10 @@ import { MatchListComponent } from './components/match-list.component';
 import { StickerAlbumComponent } from './components/sticker-album.component';
 import { CommunityListComponent } from './components/community-list.component';
 import { PollListComponent } from './components/poll-list.component';
+import { AdminDashboardComponent } from './components/admin-dashboard.component';
+import { AdminUsersComponent } from './components/admin-users.component';
 import { AuthGuard } from './services/auth.guard';
+import { AdminGuard } from './services/admin.guard';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -19,5 +22,10 @@ export const routes: Routes = [
   { path: 'stickers', component: StickerAlbumComponent, canActivate: [AuthGuard] },
   { path: 'communities', component: CommunityListComponent, canActivate: [AuthGuard] },
   { path: 'polls', component: PollListComponent, canActivate: [AuthGuard] },
+  
+  // Admin routes
+  { path: 'admin', component: AdminDashboardComponent, canActivate: [AuthGuard, AdminGuard] },
+  { path: 'admin/users', component: AdminUsersComponent, canActivate: [AuthGuard, AdminGuard] },
+  
   { path: '**', redirectTo: 'dashboard' }
 ];

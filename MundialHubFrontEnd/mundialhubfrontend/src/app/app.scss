@@ -90,6 +90,18 @@ nav a,
   }
 }
 
+nav a.admin-link {
+  background: rgba(249, 115, 22, 0.15);
+  color: #f97316;
+  border-color: rgba(249, 115, 22, 0.3);
+
+  &:hover {
+    background: rgba(249, 115, 22, 0.25);
+    border-color: rgba(249, 115, 22, 0.6);
+    box-shadow: 0 0 15px rgba(249, 115, 22, 0.2);
+  }
+}
+
 .logout {
   background: rgba(239, 68, 68, 0.15);
   color: #ff6b6b;

@@ -17,4 +17,20 @@ export class App {
     this.auth.logout();
     this.router.navigate(['/login']);
   }
+
+  isAdmin(): boolean {
+    const role = this.auth.getUserRole();
+    const userRole = Array.isArray(role) ? role[0] : role;
+    return userRole === 'ADMIN';
+  }
+
+  getRoleLabel(role: string | string[] | null): string {
+    const userRole = Array.isArray(role) ? role[0] : role;
+    const labels: any = {
+      'ADMIN': 'Administrador',
+      'OPERATOR': 'Operador',
+      'USER': 'Usuario'
+    };
+    return labels[userRole] || userRole || 'Usuario';
+  }
 }

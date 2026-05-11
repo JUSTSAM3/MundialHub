@@ -7,7 +7,8 @@
     <a routerLink="/stickers">Álbum</a>
     <a routerLink="/communities">Comunidades</a>
     <a routerLink="/polls">Pollas</a>
-    <span class="user-info" *ngIf="auth.getUserRole()">Rol: {{ auth.getUserRole() }}</span>
+    <a *ngIf="isAdmin()" routerLink="/admin" class="admin-link">⚙️ Admin</a>
+    <span class="user-info" *ngIf="auth.getUserRole()">Rol: {{ getRoleLabel(auth.getUserRole()) }}</span>
     <button type="button" class="logout" (click)="logout()">Cerrar sesión</button>
   </nav>
 </header>
