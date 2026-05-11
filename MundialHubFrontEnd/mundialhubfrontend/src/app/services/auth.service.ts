@@ -36,7 +36,7 @@ export class AuthService {
   async register(data: Record<string, unknown>) {
     const hashedData = {
       ...data,
-      password: this.hashPassword(data.password as string)
+      password: this.hashPassword(data['password'] as string)
     };
     return ApiService.register(hashedData);
   }
